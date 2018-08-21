@@ -37,7 +37,6 @@ class CarlLogin extends Component {
 				// TODO: Check password!!!!
 				if(result.status == '200') {
 					if(this.state.password == result.data[0].password) {
-						console.log('pw correct');
 					Router.pushRoute('/overview/user/' + result.data[0]._id);
 				} else {
 					this.setState({errorMessage: 'Wrong password!', loading: false})
@@ -112,7 +111,6 @@ class CarlLogin extends Component {
 
 			  </div>
 			</Layout>
-
 
 		);
   }

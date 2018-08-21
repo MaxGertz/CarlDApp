@@ -79,7 +79,13 @@ describe('Tickets', () => {
 
 		console.log(balance);
 
-
 		assert(balance > 102);
+	});
+
+	it('should take the time correctly', async () => {
+		let time = await ticket.methods.startTime().call();
+		let date = new Date().getTime();
+
+		assert(time <= date);
 	});
 });
