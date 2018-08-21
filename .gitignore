@@ -1,0 +1,12 @@
+# ignore all logs
+*.log
+# npm modules
+node_modules/
+
+.next
+
+# ignore ContractAddress
+ContractAddress_Factory.txt
+ablage.txt
+
+.babelrc
