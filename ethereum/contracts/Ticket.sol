@@ -8,8 +8,7 @@ contract TicketFactory {
         return deployedTickets;
     }
 
-    function createTicket(string licensePlate,address cpAddress, uint cost) public {
-        //TODO add parameter
+    function createTicket(string licensePlate, address cpAddress, uint cost) public {
         address newTicket = new Ticket(msg.sender, licensePlate, cpAddress, cost);
         deployedTickets.push(newTicket);
     }

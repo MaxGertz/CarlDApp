@@ -32,8 +32,6 @@ const LoginForm = () => (
           </Segment>
         </Form>
         <Message>
-					{/* TODO: change link to register page
-						// TODO: change Text size */}
           New to us? <a href='#'>Sign Up</a>
         </Message>
       </Grid.Column>

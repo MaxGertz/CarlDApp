@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import Layout from '../components/Layout';
+import withRedux from 'next-redux-wrapper';
+import { initStore } from '../redux';
+import actions from '../redux/actions';
+import initialize from '../utils/initialize';
 import {Grid, Form, Segment, Image, Button, Message} from 'semantic-ui-react';
-import axios from 'axios';
 import Fonts from '../components/Font';
+import Layout from '../components/Layout';
 
 const API = 'http://localhost:5656/api/';
 
-class RegisterUser extends Component {
+class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state ={
@@ -19,51 +22,23 @@ class RegisterUser extends Component {
 		};
 	}
 
+	static getInitialProps(ctx) {
+		initialize(ctx);
+	}
+
 	componentDidMount() {
 		Fonts();
 	}
 
-	registerNewUser = async event => {
+	registerNewUser = event => {
 		event.preventDefault();
 
-		if(this.state.username.length > 0 && this.state.password.length > 0 && this.state.licensePlate.length > 0){
-			console.log('Called register!');
-
-			try {
-
-				this.setState({loading: true});
-
-				let data = JSON.stringify({
-					name: this.state.username,
-					password: this.state.password,
-					licensePlate: this.state.licensePlate
-				});
-
-				let result = await axios.post(API + 'user/addUser', data, {
-					headers:{
-						'Content-Type':'application/json'
-					}
-				});
-
-				if(result.status == '201') {
-					this.setState({success: true, loading: false})
-
-				} else {
-					this.setState({errorMessage: 'Registration failed! Username already taken!', loading: false})
-				}
-
-			} catch (err) {
-				this.setState({errorMessage: 'Registration failed! Username already taken!', loading: false});
-			}
-
-		} else {
-			this.setState({errorMessage: 'Please enter all informations'});
-		}
+		this.props.authenticate({username: this.state.username, password: this.state.password}, 'signup');
 	}
 
 	render () {
 		return (
-		<Layout>
+			<Layout>
 			<div className='register-form'>
 
 				<Grid textAlign='center' style={{ height: '100%', marginTop: '100px' }} verticalAlign='middle'>
@@ -124,4 +99,4 @@ class RegisterUser extends Component {
 	}
 }
 
-export default RegisterUser;
+export default withRedux(initStore, null, actions)(Register);
