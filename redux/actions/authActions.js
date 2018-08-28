@@ -9,7 +9,6 @@ const authenticate = ({ username, password }, type) => {
 		throw new Error('Wrong API call!');
 	}
 	return (dispatch) => {
-		console.log(username, password);
 		axios.post(`${API}/${type}`, { username, password })
 			.then((response) => {
 				setCookie('token', response.data.token);
@@ -33,7 +32,7 @@ const deauthenticate = () => {
 	return (dispatch) => {
 		removeCookie('token');
 		// TODO: edit route
-		Router.push('/');
+		Router.push('/signin');
 		dispatch({ type: DEAUTHENTICATE });
 	};
 };

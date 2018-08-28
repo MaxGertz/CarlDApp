@@ -24,7 +24,6 @@ class UserOverview extends Component {
 		Fonts();
 	}
 
-
 	render () {
 		return (
 			<Layout>
