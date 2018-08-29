@@ -69,7 +69,7 @@ class Register extends Component {
                   .bind(this)}
                 error={!!this.state.errorMessage}
                 success={this.state.success}>
-                <Segment raised inverted color='grey'>
+                <Segment raised inverted style={{background:'#5c5f63'}}>
 
                   <Form.Field>
                     <Image
@@ -109,7 +109,10 @@ class Register extends Component {
                       .registerNewUser
                       .bind(this)}
                     loading={this.state.loading}
-                    type='submit'>Register now!</Button>
+                    type='submit'
+										style={{background:'#ffcc33', color:'#fff'}}>
+										Register now!
+									</Button>
 
                   <Message
                     error

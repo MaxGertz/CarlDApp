@@ -38,9 +38,7 @@ class Login extends Component {
   validateUser = event => {
     event.preventDefault();
 
-    this
-      .props
-      .authenticate({
+    this.props.authenticate({
         username: this.state.username,
         password: this.state.password
       }, 'signin');
@@ -76,7 +74,7 @@ class Login extends Component {
                   .bind(this)}
                 error={!!this.state.errorMessage}>
 
-                <Segment raised inverted color='grey'>
+                <Segment raised inverted style={{background:'#5c5f63'}}>
                   <Form.Field>
                     <Image
                       src='static/header.png'
@@ -98,19 +96,19 @@ class Login extends Component {
                     value={this.state.password}
                     onChange={event => this.setState({password: event.target.value})}/>
                   <Button
-                    color='yellow'
                     fluid
                     loading={this.state.loading}
-                    type="submit">
+                    type="submit"
+										style={{background:'#ffcc33', color:'#fff'}}>
                     Login
                   </Button>
-                  <Divider horizontal>Or</Divider>
+                  <Divider color='white' horizontal>Or</Divider>
                   <Button
-                    secondary
                     fluid
                     onClick={this
                       .registerUser
-                      .bind(this)}>
+                      .bind(this)}
+										style={{background:'#f24344', color:'#fff'}}>
                     Sign Up Now
                   </Button>
                   <Message

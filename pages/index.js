@@ -6,13 +6,17 @@ import initialize from '../utils/initialize';
 import {initStore} from '../redux';
 import Fonts from '../components/Font';
 import Layout from '../components/Layout';
+import TicketRow from '../components/TicketRow';
 import Logo from '../components/Logo';
-import {Form,
+import {
+	 Form,
 	 Grid,
 	 Segment,
 	 Header,
  	 Icon,
- 	 Menu} from 'semantic-ui-react';
+ 	 Menu,
+	 Row,
+ 	 Table} from 'semantic-ui-react';
 
 class Overview extends Component {
 	constructor(props) {
@@ -38,23 +42,28 @@ class Overview extends Component {
 	        }
 	      });
 	    const user = responseUser.data;
-			console.log(user);
 
 			const responseTicket = await axios.get(`${API}/api/ticket/openTickets`, {
 					headers: {
 						authorization: token
 					}
 				});
-
 			const tickets = responseTicket.data;
-			console.log(tickets);
 
 	    return {user: user, tickets: tickets, loggedIn: true};
+		}
 	}
-}
 
 	componentDidMount(){
 		Fonts();
+	}
+
+	renderTickets() {
+		return this.props.tickets.map((ticket, index) => {
+			return <TicketRow
+				key={index}
+				ticket={ticket}/>;
+		});
 	}
 
 	render () {
@@ -67,21 +76,16 @@ class Overview extends Component {
 						textAlign='center'
 						style={{
 							height: '100%',
-							marginTop: '100px'
+							marginTop: '100px',
 						}}
 						verticalAlign='middle'>
-						<Grid.Column
-							style={{
-							maxWidth: 900
-						}}>
-						<Form
-							size='massive'>
-							<Segment raised inverted color='grey'>
-								<Form.Field>
-									<Logo/>
-								</Form.Field>
+						<Segment raised inverted style={{width: '900px', background: '#5c5f63' }}>
 
-								<Menu>
+						<Grid.Column>
+
+							<Logo/>
+
+								<Menu borderless style={{margin: '2em 0em 2em'}}>
 									<Menu.Item
 										name='username'>
 
@@ -93,7 +97,7 @@ class Overview extends Component {
 
 									<Menu.Item
 									 name='settings'>
-									 <Icon name='settings' size='small'/>
+									 <Icon name='settings' size='small' />
 									</Menu.Item>
 
 									<Menu.Item
@@ -104,20 +108,39 @@ class Overview extends Component {
 									</Menu.Item>
 
 								</Menu>
-							</Segment>
-						</Form>
+
 					</Grid.Column>
-				</Grid>
+
+					<Grid.Column>
+					<Table style={{margin: '4em 0em 2em'}}>
+
+						<Table.Header>
+							<Table.Row textAlign='center'>
+								<Table.HeaderCell>License Plate</Table.HeaderCell>
+								<Table.HeaderCell>Start Time</Table.HeaderCell>
+								<Table.HeaderCell>Carpark</Table.HeaderCell>
+								<Table.HeaderCell>Show</Table.HeaderCell>
+							</Table.Row>
+						</Table.Header>
+
+							<Table.Body>
+								{this.renderTickets()}
+							</Table.Body>
+
+					</Table>
+				</Grid.Column>
+			</Segment>
+		</Grid>
+
 			) || <h3>Not authenticated</h3>
 	}
-
 
 
 
 		</Layout>
 	  </div>
 
-	)
+		)
 	}
 }
 
