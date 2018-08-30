@@ -38,10 +38,19 @@ class Login extends Component {
   validateUser = event => {
     event.preventDefault();
 
-    this.props.authenticate({
-        username: this.state.username,
-        password: this.state.password
-      }, 'signin');
+		this.setState({loading: true, errorMessage:''});
+
+		try{
+			 this.props.authenticate({
+	        username: this.state.username,
+	        password: this.state.password
+	      }, 'signin');
+		} catch(err) {
+			this.setState({errorMessage: err.message});
+		}
+
+		this.setState({loading: false});
+		// TODO: only logged in after page reload! Why? Token is stored!
   }
 
   registerUser(event) {

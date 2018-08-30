@@ -11,10 +11,10 @@ import Logo from '../components/Logo';
 import {
 	 Form,
 	 Grid,
-	 Segment,
+	 Menu,
 	 Header,
- 	 Icon,
- 	 Menu,
+	 Icon,
+	 Segment,
 	 Row,
  	 Table} from 'semantic-ui-react';
 
@@ -32,6 +32,7 @@ class Overview extends Component {
 		initialize(ctx);
 
 	  const token = ctx.store.getState().authentication.token;
+		console.log(token);
 
 	  if (token) {
 	    const responseUser = await axios.get(
@@ -93,7 +94,7 @@ class Overview extends Component {
 											<Icon name='user circle' size='small'/>
 											<Header.Content>{this.props.user.name}</Header.Content>
 										</Header>
-									</Menu.Item>
+									</Menu.Item>/
 
 									<Menu.Item
 									 name='settings'>
@@ -106,7 +107,6 @@ class Overview extends Component {
 										>
 										<Icon name='log out' size='small'/>
 									</Menu.Item>
-
 								</Menu>
 
 					</Grid.Column>
@@ -128,7 +128,9 @@ class Overview extends Component {
 							</Table.Body>
 
 					</Table>
+
 				</Grid.Column>
+
 			</Segment>
 		</Grid>
 

@@ -1,4 +1,4 @@
-import Router from 'next/router';
+import {Router} from '../../routes';
 import axios from 'axios';
 import { AUTHENTICATE, DEAUTHENTICATE } from '../types';
 import { API } from '../../config';
@@ -13,7 +13,7 @@ const authenticate = ({ username, password }, type) => {
 			.then((response) => {
 				setCookie('token', response.data.token);
 				// TODO: edit to correct route!
-				Router.push('/');
+				Router.pushRoute('/');
 				dispatch({ type: AUTHENTICATE, payload: response.data.token });
 			})
 			.catch((err) => {
@@ -32,7 +32,7 @@ const deauthenticate = () => {
 	return (dispatch) => {
 		removeCookie('token');
 		// TODO: edit route
-		Router.push('/signin');
+		Router.pushRoute('/signin');
 		dispatch({ type: DEAUTHENTICATE });
 	};
 };
