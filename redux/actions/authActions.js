@@ -12,9 +12,9 @@ const authenticate = ({ username, password }, type) => {
 		axios.post(`${API}/${type}`, { username, password })
 			.then((response) => {
 				setCookie('token', response.data.token);
-				// TODO: edit to correct route!
-				Router.pushRoute('/');
 				dispatch({ type: AUTHENTICATE, payload: response.data.token });
+				Router.pushRoute('/');
+
 			})
 			.catch((err) => {
 				throw new Error(err);

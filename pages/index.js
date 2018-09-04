@@ -19,6 +19,8 @@ import {
  	 Table} from 'semantic-ui-react';
 
 class Overview extends Component {
+	targetElement = null;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -136,7 +138,6 @@ class Overview extends Component {
 
 			) || <h3>Not authenticated</h3>
 	}
-
 
 
 		</Layout>

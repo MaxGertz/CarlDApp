@@ -45,12 +45,12 @@ class Login extends Component {
 	        username: this.state.username,
 	        password: this.state.password
 	      }, 'signin');
+
 		} catch(err) {
 			this.setState({errorMessage: err.message});
 		}
 
 		this.setState({loading: false});
-		// TODO: only logged in after page reload! Why? Token is stored!
   }
 
   registerUser(event) {

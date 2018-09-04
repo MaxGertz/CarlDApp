@@ -5,7 +5,7 @@ const routes = require('next-routes')();
 routes
 	.add('signin')
 	.add('signup')
-	.add('/showticket/:id', 'showticket')
+	.add({ name : 'Show Ticket', pattern:'/showticket/:id', page: 'showticket' })
 	.add({ name: 'Overview', pattern: '/', page: 'index' });
 
 module.exports = routes;
