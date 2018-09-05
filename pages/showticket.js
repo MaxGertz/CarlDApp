@@ -3,10 +3,14 @@ import Layout from '../components/Layout';
 import Logo from '../components/Logo';
 import axios from 'axios';
 import {API} from '../config';
+import Menubar from '../components/Menubar';
+import datetime from '../utils/datetime';
 import {Grid,
 				Menu,
 				Header,
 				Image,
+				Divider,
+				Button,
 				Icon,
 				Card,
 				Segment} from 'semantic-ui-react';
@@ -16,12 +20,15 @@ class ShowTicket extends Component {
 		super(props);
 		this.state = {
 			ticket: '',
-			carpark: ''
+			carpark: '',
+			user: '',
+			startTime: ''
 		};
 	}
 
 	// TODO: get ticket information from sc not db -> carpark info from db!
 	static async getInitialProps(props) {
+
 
 		const contractAddress = props.query.id;
 
@@ -29,16 +36,34 @@ class ShowTicket extends Component {
 			`${API}/api/ticket/byCA/${contractAddress}`);
 		const ticket = responseTicket.data;
 
+		const responseUser = await axios.get(
+			`${API}/api/user/find/${ticket.userId}`);
+		const user = responseUser.data;
+
 		const responseCarpark = await axios.get(
-			`${API}/api/carpark/${ticket.carparkId}`);
+		`${API}/api/carpark/${ticket.carparkId}`);
 		const carpark = responseCarpark.data;
 
-		return {ticket: ticket, carpark: carpark};
+		const startTime = datetime(ticket.startTime);
+
+		return {ticket: ticket, carpark: carpark, user: user, startTime: startTime};
+		}
+
+		renderCarpark() {
+			return(
+					<Grid.Column style={{width: '200px'}}>
+						<b>CARPARK: </b>
+						<Grid.Row>{this.props.carpark.name}</Grid.Row>
+						<Grid.Row>{this.props.carpark.address.street} {this.props.carpark.address.number}</Grid.Row>
+						<Grid.Row>{this.props.carpark.address.zipCode} {this.props.carpark.address.city}</Grid.Row>
+					</Grid.Column>
+			);
 		}
 
 
 	render() {
 		console.log(this.props);
+
 		return(
 			<div>
 				<Layout>
@@ -58,6 +83,8 @@ class ShowTicket extends Component {
 							 background: '#5c5f63'}}>
 
 								<Logo/>
+
+								<Menubar user={this.props.user}/>
 									<div className='ticket'>
 											<style jsx>{`
 																.ticket{
@@ -74,37 +101,39 @@ class ShowTicket extends Component {
 											}}>
 
 												<div className='info' style={{margin: '4em 12em 2em'}}>
-													<Grid columns={3} stretched inverted>
-															<Grid.Column>
-																<b>Contract: </b>
-																{this.props.ticket.contractAddress}
+													<Grid columns={3} stretched inverted style={{width: '400px'}}>
+
+														<Grid.Row>
+															<Grid.Column style={{width: '300px'}}>
+																<Grid.Row><b>CONTRACT: </b></Grid.Row>
+																<Grid.Row>{this.props.ticket.contractAddress}</Grid.Row>
+
       												</Grid.Column>
 
-															<Grid.Column>
-																<b>License Plate: </b>
-																{this.props.ticket.licensePlate}
-
+															<Grid.Column style={{width: '300px', marginTop: '10px'}}>
+																<Grid.Row><b>LICENSE PLATE: </b></Grid.Row>
+																<Grid.Row>{this.props.ticket.licensePlate}</Grid.Row>
 															</Grid.Column>
-															<Grid.Column>
-																<b>IN: </b>
-																{this.props.ticket.startTime}
+														</Grid.Row>
+
+															<Grid.Column style={{width: '250px'}}>
+																<Grid.Row><b>IN: </b></Grid.Row>
+																<Grid.Row>{this.props.startTime}</Grid.Row>
 															</Grid.Column>
 
+															<Grid.Column>
+																<Grid.Row><b>COST/HOUR:</b></Grid.Row>
+																<Grid.Row>{this.props.carpark.costHour} Ether</Grid.Row>
+															</Grid.Column>
 
+																{this.renderCarpark()}
 
 													 </Grid>
-
-
-
 												</div>
 											</Segment>
-
-
-
 									 </div>
 
-
-
+									 <Divider fitted inverted/>
 
 				 </Segment>
 				</Grid>

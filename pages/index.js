@@ -6,6 +6,7 @@ import initialize from '../utils/initialize';
 import {initStore} from '../redux';
 import Fonts from '../components/Font';
 import Layout from '../components/Layout';
+import Menubar from '../components/Menubar'
 import TicketRow from '../components/TicketRow';
 import Logo from '../components/Logo';
 import {
@@ -34,7 +35,6 @@ class Overview extends Component {
 		initialize(ctx);
 
 	  const token = ctx.store.getState().authentication.token;
-		console.log(token);
 
 	  if (token) {
 	    const responseUser = await axios.get(
@@ -65,11 +65,17 @@ class Overview extends Component {
 		return this.props.tickets.map((ticket, index) => {
 			return <TicketRow
 				key={index}
-				ticket={ticket}/>;
+				ticket={ticket}
+				user={this.props.user}/>;
 		});
 	}
 
 	render () {
+		const isServer = typeof window === 'undefined'
+		if (isServer) {
+			console.log('isServer ' + true);
+
+		}
 		return(
 		<div>
 			<Layout>
@@ -88,28 +94,7 @@ class Overview extends Component {
 
 							<Logo/>
 
-								<Menu borderless style={{margin: '2em 0em 2em'}}>
-									<Menu.Item
-										name='username'>
-
-										<Header as='h2' size='small'>
-											<Icon name='user circle' size='small'/>
-											<Header.Content>{this.props.user.name}</Header.Content>
-										</Header>
-									</Menu.Item>/
-
-									<Menu.Item
-									 name='settings'>
-									 <Icon name='settings' size='small' />
-									</Menu.Item>
-
-									<Menu.Item
-										name='logout'
-										position='right'
-										>
-										<Icon name='log out' size='small'/>
-									</Menu.Item>
-								</Menu>
+								<Menubar user={this.props.user}/>
 
 					</Grid.Column>
 
