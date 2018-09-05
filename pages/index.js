@@ -8,6 +8,7 @@ import Fonts from '../components/Font';
 import Layout from '../components/Layout';
 import Menubar from '../components/Menubar'
 import TicketRow from '../components/TicketRow';
+import AuthError from '../components/AuthError';
 import Logo from '../components/Logo';
 import {
 	 Form,
@@ -121,7 +122,7 @@ class Overview extends Component {
 			</Segment>
 		</Grid>
 
-			) || <h3>Not authenticated</h3>
+	) || <AuthError/>
 	}
 
 
