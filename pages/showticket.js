@@ -133,7 +133,6 @@ class ShowTicket extends Component {
 											</Segment>
 									 </div>
 
-									 <Divider fitted inverted/>
 
 				 </Segment>
 				</Grid>
