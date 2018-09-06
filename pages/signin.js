@@ -61,9 +61,7 @@ class Login extends Component {
   }
 
   render() {
-		const isServer = typeof window === 'undefined';
-		console.log('Login: isServer ' + isServer);
-
+		console.log(this.props);
     return (
       <div className='login-form'>
         <Layout>

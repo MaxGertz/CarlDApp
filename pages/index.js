@@ -71,12 +71,7 @@ class Overview extends Component {
 		});
 	}
 
-	render () {
-		const isServer = typeof window === 'undefined'
-		if (isServer) {
-			console.log('isServer ' + true);
-
-		}
+	render() {
 		return(
 		<div>
 			<Layout>

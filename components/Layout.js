@@ -12,7 +12,7 @@ export default(props) => {
     </Head>
 			<style jsx global>{`
 								body {
-									background: grey url(static/background.jpg)center fixed !important;
+									background: grey url(../static/background.jpg)center fixed !important;
 									background-size: cover !important;
 									background-repeat: no-repeat;
 									background-attachment: fixed;

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Table, Button} from 'semantic-ui-react';
+import Fonts from '../components/Font';
 import axios from 'axios';
 import {API} from '../config';
 import {Router} from '../routes';
@@ -18,19 +19,19 @@ class TicketRow extends Component{
 
 	// TODO: try with getInitialProps
 	async componentDidMount() {
+		Fonts();
 		const responseCarpark = await axios.get(
 			`${API}/api/carpark/${this.props.ticket.carparkId}`
 		);
+		const carpark = responseCarpark.data;
 
-		const date = datetime(this.props.ticket.startTime);
-		console.log(date);
-		this.setState({carpark: responseCarpark.data, start: date})
+		this.setState({carpark: carpark});
 	}
 
 	onClick = event => {
 		event.preventDefault();
 
-		Router.pushRoute(`/showticket/${this.props.ticket.contractAddress}`);
+		Router.pushRoute('showTicket', {id: this.props.ticket.contractAddress});
 	}
 
 	render() {
@@ -39,7 +40,7 @@ class TicketRow extends Component{
 		return(
 			<Row textAlign='center'>
 				<Cell>{this.props.ticket.licensePlate}</Cell>
-				<Cell>{this.state.start}</Cell>
+				<Cell>{datetime(this.props.ticket.startTime)}</Cell>
 				<Cell>{this.state.carpark.name}</Cell>
 				<Cell>
 						<Button

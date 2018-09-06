@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "dev": "next dev"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
   },
-  "author": "",
+  "author": "Max Gertz",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",

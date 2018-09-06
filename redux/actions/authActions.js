@@ -31,9 +31,8 @@ const reauthenticate = (token) => {
 const deauthenticate = () => {
 	return (dispatch) => {
 		removeCookie('token');
-		// TODO: edit route
-		Router.pushRoute('/signin');
 		dispatch({ type: DEAUTHENTICATE });
+		Router.pushRoute('signin');
 	};
 };
 

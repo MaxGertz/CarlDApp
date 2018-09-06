@@ -1,6 +1,5 @@
 export default function(timestamp) {
 	var date = new Date(timestamp*1000);
-	console.log("Date: " + date);
 
 	var year = date.getFullYear();
 	var month = date.getMonth() + 1;
@@ -18,8 +17,6 @@ export default function(timestamp) {
 
 
 	var str = day + "." + month + "." + year + " " +  hour + ":" + min + ":" + sec;
-
-	/*alert(str);*/
 
 	return str;
 }
