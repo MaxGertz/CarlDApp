@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {API} from '../config';
 import initialize from '../utils/initialize';
 import {initStore} from '../redux';
+import {Router} from '../routes';
 import Fonts from '../components/Font';
 import Layout from '../components/Layout';
 import Menubar from '../components/Menubar'
@@ -13,6 +14,7 @@ import Logo from '../components/Logo';
 import {
 	 Form,
 	 Grid,
+	 Button,
 	 Menu,
 	 Header,
 	 Icon,
@@ -21,14 +23,9 @@ import {
  	 Table} from 'semantic-ui-react';
 
 class Overview extends Component {
-	targetElement = null;
-
 	constructor(props) {
 		super(props);
 		this.state = {
-			user:'',
-			tickets:'',
-			loggedIn: false
 		};
 	}
 
@@ -62,6 +59,13 @@ class Overview extends Component {
 		Fonts();
 	}
 
+	openDeployTicket = event => {
+		event.preventDefault();
+
+		console.log('Called deploy new ticket');
+		Router.pushRoute('/test/deployTicket');
+	}
+
 	renderTickets() {
 		return this.props.tickets.map((ticket, index) => {
 			return <TicketRow
@@ -73,60 +77,61 @@ class Overview extends Component {
 
 	render() {
 		return(
-		<div>
-			<Layout>
-				{
-				(this.props.loggedIn &&
-					<Grid
-						textAlign='center'
-						style={{
-							height: '100%',
-							marginTop: '100px',
-						}}
-						verticalAlign='middle'>
-						<Segment raised inverted style={{width: '900px', background: '#5c5f63' }}>
+				<div>
+					<Layout>
 
-						<Grid.Column>
+						{(this.props.loggedIn &&
+							<Grid
+								textAlign='center'
+								style={{
+									height: '100%',
+									marginTop: '100px',
+								}}
+								verticalAlign='middle'>
 
-							<Logo/>
+								<Segment
+									raised
+									inverted
+									style={{width: '900px', background: '#5c5f63' }}>
 
-								<Menubar user={this.props.user}/>
+									<Grid.Column>
+										<Logo/>
+										<Menubar user={this.props.user}/>
+									</Grid.Column>
 
-					</Grid.Column>
+									<Grid.Column>
+										<Table style={{margin: '4em 0em 2em'}}>
 
-					<Grid.Column>
-					<Table style={{margin: '4em 0em 2em'}}>
+											<Table.Header>
+												<Table.Row textAlign='center'>
+													<Table.HeaderCell>License Plate</Table.HeaderCell>
+													<Table.HeaderCell>Start Time</Table.HeaderCell>
+													<Table.HeaderCell>Carpark</Table.HeaderCell>
+													<Table.HeaderCell>Show</Table.HeaderCell>
+												</Table.Row>
+											</Table.Header>
+												<Table.Body>
+													{this.renderTickets()}
+												</Table.Body>
+										</Table>
+								</Grid.Column>
 
-						<Table.Header>
-							<Table.Row textAlign='center'>
-								<Table.HeaderCell>License Plate</Table.HeaderCell>
-								<Table.HeaderCell>Start Time</Table.HeaderCell>
-								<Table.HeaderCell>Carpark</Table.HeaderCell>
-								<Table.HeaderCell>Show</Table.HeaderCell>
-							</Table.Row>
-						</Table.Header>
+								<Button
+									size='small'
+									onClick={this.openDeployTicket.bind(this)}
+									style={{background:'#f24344', color:'#fff'}}>
+									Deploy new ticket!
+								</Button>
 
-							<Table.Body>
-								{this.renderTickets()}
-							</Table.Body>
+							</Segment>
+						</Grid>
 
-					</Table>
-
-				</Grid.Column>
-
-			</Segment>
-		</Grid>
-
-	) || <AuthError/>
-	}
-
+			) || <AuthError/> }
 
 		</Layout>
-	  </div>
-
-		)
+	</div>
+		)}
 	}
-}
 
 
 export default withRedux(initStore)(

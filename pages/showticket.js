@@ -3,12 +3,9 @@ import Layout from '../components/Layout';
 import Logo from '../components/Logo';
 import axios from 'axios';
 import {API} from '../config';
-
 import withRedux from 'next-redux-wrapper';
 import {initStore} from '../redux';
 import initialize from '../utils/initialize';
-
-
 import Menubar from '../components/Menubar';
 import datetime from '../utils/datetime';
 import {Grid,
@@ -53,10 +50,8 @@ class ShowTicket extends Component {
 		}
 
 		getCost = () =>{
-
 			const currentTime = Math.floor(Date.now()/1000);
-
-			const currentCost = parseFloat((currentTime - parseInt(this.props.ticket.startTime))) * (this.props.carpark.costHour/60/60);
+			const currentCost = parseFloat((currentTime - parseInt(this.props.ticket.startTime)))*(this.props.carpark.costHour/60/60);
 
 			return currentCost.toFixed(4);
 		}
@@ -71,7 +66,7 @@ class ShowTicket extends Component {
 
 		renderCarpark() {
 			return(
-					<Grid.Column style={{width: '200px'}}>
+					<Grid.Column style={{width: '400px', marginTop: '10px'}}>
 						<b>CARPARK: </b>
 						<Grid.Row>{this.props.carpark.name}</Grid.Row>
 						<Grid.Row>{this.props.carpark.address.street} {this.props.carpark.address.number}</Grid.Row>
@@ -103,8 +98,8 @@ class ShowTicket extends Component {
 							 background: '#5c5f63'}}>
 
 								<Logo/>
-
 								<Menubar user={this.props.user}/>
+
 									<div className='ticket'>
 											<style jsx>{`
 																.ticket{
@@ -127,8 +122,8 @@ class ShowTicket extends Component {
 															<Grid.Column style={{width: '300px'}}>
 																<Grid.Row><b>CONTRACT: </b></Grid.Row>
 																<Grid.Row>{this.props.ticket.contractAddress}</Grid.Row>
-
       												</Grid.Column>
+
 																<Grid.Column style={{width: '250px', marginTop: '10px'}}>
 																	<Grid.Row><b>LICENSE PLATE: </b></Grid.Row>
 																	<Grid.Row>{this.props.ticket.licensePlate}</Grid.Row>
@@ -138,7 +133,7 @@ class ShowTicket extends Component {
 																	<Grid.Row><b>COST/HOUR:</b></Grid.Row>
 																	<Grid.Row>{this.props.carpark.costHour} Ether</Grid.Row>
 																</Grid.Column>
-														</Grid.Row>
+															</Grid.Row>
 
 														<Grid.Row>
 															<Grid.Column style={{width: '250px'}}>
@@ -150,14 +145,12 @@ class ShowTicket extends Component {
 																<Grid.Row><b>TICKET COST: </b></Grid.Row>
 																<Grid.Row>{this.getCost()} Ether</Grid.Row>
 															</Grid.Column>
-														</Grid.Row>
-
-
-
 																{this.renderCarpark()}
+														</Grid.Row>
 
 													 </Grid>
 												</div>
+
 											</Segment>
 									 </div>
 
@@ -172,7 +165,7 @@ class ShowTicket extends Component {
                      loading={this.state.loading}
                      type="submit"
 										 onClick={this.requestCar.bind(this)}
- 										 style={{marginTop: '2em', background:'#ffcc33', color:'#fff'}}>
+ 										 style={{marginTop: '2em',marginBottom: '2em', background:'#ffcc33', color:'#fff'}}>
 										 Request car & pay ticket
 									 </Button>
 								 </Form>

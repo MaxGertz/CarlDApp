@@ -13,6 +13,7 @@ import {
 } from 'semantic-ui-react';
 import Fonts from '../components/Font';
 import Layout from '../components/Layout';
+import Logo from '../components/Logo';
 
 class Register extends Component {
   constructor(props) {
@@ -72,9 +73,7 @@ class Register extends Component {
                 <Segment raised inverted style={{background:'#5c5f63'}}>
 
                   <Form.Field>
-                    <Image
-                      src='static/header.png'
-                      size='massive'/>
+                    <Logo/>
                   </Form.Field>
 
                   <Form.Input

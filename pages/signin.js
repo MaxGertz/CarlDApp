@@ -8,13 +8,13 @@ import {
   Form,
   Grid,
   Segment,
-  Image,
   Divider,
   Message
 } from 'semantic-ui-react';
 import {Router} from '../routes';
 import Fonts from '../components/Font';
 import Layout from '../components/Layout';
+import Logo from '../components/Logo';
 
 class Login extends Component {
   constructor(props) {
@@ -86,9 +86,7 @@ class Login extends Component {
 
                 <Segment raised inverted style={{background:'#5c5f63'}}>
                   <Form.Field>
-                    <Image
-                      src='static/header.png'
-                      size='massive'/>
+                    <Logo/>
                   </Form.Field>
                   <Form.Input
                     fluid
@@ -112,7 +110,7 @@ class Login extends Component {
 										style={{background:'#ffcc33', color:'#fff'}}>
                     Login
                   </Button>
-                  <Divider color='white' horizontal>Or</Divider>
+                  <Divider  horizontal style={{color: '#fff'}}>Or</Divider>
                   <Button
                     fluid
                     onClick={this
