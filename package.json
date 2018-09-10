@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Parking system using smart contracts(ethereum)",
   "main": "index.js",
+  "repository": "https://gitlab.com/Skmagert/CarlDApp.git",
   "scripts": {
     "test": "mocha",
     "dev": "next dev",

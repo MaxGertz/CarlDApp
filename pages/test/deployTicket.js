@@ -1,16 +1,12 @@
 import React, {Component} from 'react';
-
 import initialize from '../../utils/initialize';
 import {initStore} from '../../redux';
 import withRedux from 'next-redux-wrapper';
 import axios from 'axios';
 import {API} from '../../config';
-
 import web3 from '../../ethereum/web3';
 import factory from '../../ethereum/factory';
 import Ticket from '../../ethereum/ticket';
-
-
 import AuthError from '../../components/AuthError';
 import Logo from '../../components/Logo';
 import Layout from '../../components/Layout';
@@ -175,7 +171,11 @@ class DeployTicket extends Component {
 												selection
 												onChange={(event, data) => {this.onChangeCarpark(data.value)}}
 												options={this.props.carparks.map(cp => {
-													return{key: cp._id, text: cp.name, value: cp, content: <Header icon='warehouse' content={cp.name} size='tiny'/>};
+													return{
+														key: cp._id,
+														text: cp.name,
+														value: cp,
+														content: <Header icon='warehouse' content={cp.name} size='tiny'/>};
 												})}>
 											</Dropdown>
 										</Form.Field>
@@ -183,9 +183,13 @@ class DeployTicket extends Component {
 											<Dropdown
 												placeholder='Select car'
 												selection
-											Select	onChange={(event, data) => {this.onChangeLP(data.value)}}
+												onChange={(event, data) => {this.onChangeLP(data.value)}}
 												options={this.props.user.licensePlate.map(lp => {
-													return{key: lp, text: lp, value: lp, content: <Header  icon='car' content={lp} size='tiny'/>};
+													return{
+														key: lp,
+														text: lp,
+														value: lp,
+														content: <Header  icon='car' content={lp} size='tiny'/>};
 												})}>
 											</Dropdown>
 										</Form.Field>
@@ -209,16 +213,13 @@ class DeployTicket extends Component {
  									 </Button>
 
 									</Form>
-
 							</Segment>
-
-
-							</Segment>
+						</Segment>
 					</Grid>
 
 
 					 ) || <AuthError/> }
-				</Layout>
+			</Layout>
 		</div>
 		)
 	}

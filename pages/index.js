@@ -104,7 +104,7 @@ class Overview extends Component {
 
 											<Table.Header>
 												<Table.Row textAlign='center'>
-													<Table.HeaderCell>License Plate</Table.HeaderCell>
+													<Table.HeaderCell >License Plate</Table.HeaderCell>
 													<Table.HeaderCell>Start Time</Table.HeaderCell>
 													<Table.HeaderCell>Carpark</Table.HeaderCell>
 													<Table.HeaderCell>Show</Table.HeaderCell>
