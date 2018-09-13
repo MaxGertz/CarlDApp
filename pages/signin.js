@@ -55,13 +55,11 @@ class Login extends Component {
 
   registerUser(event) {
     event.preventDefault();
-    console.log('Called register!');
 
     Router.pushRoute('/signup');
   }
 
   render() {
-		console.log(this.props);
     return (
       <div className='login-form'>
         <Layout>

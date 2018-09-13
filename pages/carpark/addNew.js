@@ -48,7 +48,6 @@ class AddCarpark extends Component {
 
 				 try {
 					 const accounts = await web3.eth.getAccounts();
-					 console.log(accounts);
 					 // string name, string costPerHour, uint32 parkingSpaces
 
 					 await carparkFactory.methods.deployCarpark(

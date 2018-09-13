@@ -66,22 +66,17 @@ class ShowTicket extends Component {
 
 			this.setState({loading: true, errorMessage: ''});
 
-			console.log('Called request car!');
-
 			try {
 				const accounts = await web3.eth.getAccounts();
 
 				const ticketSC = Ticket(this.props.ticket.contractAddress);
-				console.log(ticketSC);
 
 				await ticketSC.methods.closeTicket().send({
 					from: accounts[0]
 				});
 
 				const parkingCosts = await ticketSC.methods.parkingCosts().call();
-				console.log('parkingCosts',parkingCosts);
 				const endTime = await ticketSC.methods.endTime().call();
-				console.log('endTime', endTime);
 
 				await ticketSC.methods.payTicket().send({
 					from: accounts[0],
@@ -117,8 +112,6 @@ class ShowTicket extends Component {
 
 
 	render() {
-		console.log(this.state);
-
 		return(
 			<div>
 				<Layout>

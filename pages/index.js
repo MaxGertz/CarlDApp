@@ -62,7 +62,6 @@ class Overview extends Component {
 	openDeployTicket = event => {
 		event.preventDefault();
 
-		console.log('Called deploy new ticket');
 		Router.pushRoute('/test/deployTicket');
 	}
 

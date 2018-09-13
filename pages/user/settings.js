@@ -29,7 +29,6 @@ class Settings extends Component {
 		const token = ctx.store.getState().authentication.token;
 
 		if (token) {
-			console.log(token);
 			const responseUser = await axios.get(
 				`${API}/user `,
 				{
@@ -38,7 +37,6 @@ class Settings extends Component {
 				}
 			});
 			const user = responseUser.data;
-			console.log(user);
 
 			return {user: user, loggedIn: true};
 		}
@@ -57,7 +55,6 @@ class Settings extends Component {
 					licensePlate: this.state.licensePlate
 				}
 			);
-			console.log(res);
 			if(res.status == 200) {
 				this.setState({loading: false, success: true});
 			} else {

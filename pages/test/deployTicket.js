@@ -37,7 +37,6 @@ class DeployTicket extends Component {
 		const token = ctx.store.getState().authentication.token;
 
 		if (token) {
-			console.log(token);
 			const responseUser = await axios.get(
 				`${API}/user `,
 				{
@@ -46,12 +45,10 @@ class DeployTicket extends Component {
 				}
 			});
 			const user = responseUser.data;
-			console.log(user);
 			const responseCarparks = await axios.get(
 				`${API}/api/carpark/getAllCarparks`
 			);
 			const carparks = responseCarparks.data;
-			console.log(carparks);
 
 			return {user: user, carparks: carparks, loggedIn: true};
 		}
@@ -69,8 +66,6 @@ class DeployTicket extends Component {
 		event.preventDefault();
 
 		if(this.state.licensePlate != null && this.state.carpark != null) {
-			console.log('Open ticket with:', this.state);
-
 			this.setState({loading: true,success: false, errorMessage: ''});
 
 			try {
@@ -89,12 +84,9 @@ class DeployTicket extends Component {
 
 				// IDEA: let createTicket return the contractAddress!
 				const deployedTickets = await factory.methods.getDeployedTickets().call();
-				console.log(deployedTickets);
 				const ticketAddress = deployedTickets[deployedTickets.length-1];
-				console.log(ticketAddress);
 
 				const ticketSC = Ticket(ticketAddress);
-				console.log(ticketSC);
 
 				const startTime = await ticketSC.methods.startTime().call();
 
@@ -126,7 +118,6 @@ class DeployTicket extends Component {
 	}
 
 	render() {
-		console.log(this.state);
 		return (
 			<div>
 				<Layout>
