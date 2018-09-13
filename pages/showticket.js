@@ -8,6 +8,10 @@ import {initStore} from '../redux';
 import initialize from '../utils/initialize';
 import Menubar from '../components/Menubar';
 import datetime from '../utils/datetime';
+
+import web3 from '../ethereum/web3';
+import Ticket from '../ethereum/ticket';
+
 import {Grid,
 				Menu,
 				Header,
@@ -23,6 +27,7 @@ class ShowTicket extends Component {
 		super(props);
 		this.state = {
 			loading: false,
+			success: false,
 			errorMessage: ''
 		};
 	}
@@ -56,12 +61,47 @@ class ShowTicket extends Component {
 			return currentCost.toFixed(4);
 		}
 
-		requestCar = event => {
+		requestCar = async (event) => {
 			event.preventDefault();
 
-			this.setState({loading: true, errorMessage: 'test'});
+			this.setState({loading: true, errorMessage: ''});
 
 			console.log('Called request car!');
+
+			try {
+				const accounts = await web3.eth.getAccounts();
+
+				const ticketSC = Ticket(this.props.ticket.contractAddress);
+				console.log(ticketSC);
+
+				await ticketSC.methods.closeTicket().send({
+					from: accounts[0]
+				});
+
+				const parkingCosts = await ticketSC.methods.parkingCosts().call();
+				console.log('parkingCosts',parkingCosts);
+				const endTime = await ticketSC.methods.endTime().call();
+				console.log('endTime', endTime);
+
+				await ticketSC.methods.payTicket().send({
+					from: accounts[0],
+					value: parkingCosts
+				})
+
+				const res = await axios.put(
+					`${API}/api/ticket/closeTicket`,
+					{
+						_id: this.props.ticket._id,
+						endTime: endTime
+					});
+					if(res.status == 200) {
+						this.setState({loading: false, success: true});
+					} else {
+						this.setState({loading: false, errorMessage: 'Ticket is closed but not saved in the database'});
+					}
+			} catch (err) {
+				this.setState({errorMessage: err.message, loading: false});
+			}
 		}
 
 		renderCarpark() {
@@ -106,7 +146,7 @@ class ShowTicket extends Component {
 																	background: url(../static/Ticket_bg.png) center;
 																	background-size: 63em !important;
 																	background-repeat: no-repeat;
-																	font-family: "Lucida Console", Monaco, monospace;
+																	font-family: Lucida Console, Monaco, monospace;
 																	}`}
 											</style>
 
@@ -154,14 +194,19 @@ class ShowTicket extends Component {
 											</Segment>
 									 </div>
 
-									 <Form error={!!this.state.errorMessage} style={{marginTop: '1em'}}>
+									 <Form error={!!this.state.errorMessage} success={this.state.success} style={{marginTop: '1em'}}>
 									 <Message
                      error
                      header={'Oops!'}
                      content={this.state.errorMessage}/>
+									 <Message
+										 success
+										 header={'Successfully requested car'}
+										 content='You can pick up your car at B3'/>
 
 									 <Button
 										 fluid
+										 disabled={this.state.success}
                      loading={this.state.loading}
                      type="submit"
 										 onClick={this.requestCar.bind(this)}

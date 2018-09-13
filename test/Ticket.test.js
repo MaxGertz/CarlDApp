@@ -7,14 +7,13 @@ const options = {
 const provider = ganache.provider(options);
 
 const web3 = new Web3(provider); //instantiation of web3(For test using ganache)
-const compiledTicketFactory = require('../ethereum/build/TicketFactory.json');
-const compiledTicket = require('../ethereum/build/Ticket.json');
+const compiledTicketFactory = require('../ethereum/build/ticket/TicketFactory.json');
+const compiledTicket = require('../ethereum/build/ticket/Ticket.json');
 
 let accounts;
 let ticket;
 let ticketAddress;
 let ticketFactory;
-
 
 beforeEach(async () => {
 	accounts = await web3.eth.getAccounts();

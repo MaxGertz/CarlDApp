@@ -5,7 +5,7 @@ import withRedux from 'next-redux-wrapper';
 import axios from 'axios';
 import {API} from '../../config';
 import web3 from '../../ethereum/web3';
-import factory from '../../ethereum/factory';
+import factory from '../../ethereum/ticketfactory';
 import Ticket from '../../ethereum/ticket';
 import AuthError from '../../components/AuthError';
 import Logo from '../../components/Logo';
@@ -107,8 +107,7 @@ class DeployTicket extends Component {
 						contractAddress: ticketAddress,
 						licensePlate: this.state.licensePlate,
 						startTime: startTime
-					}
-				);
+					});
 				if(res.status == 201) {
 					this.setState({loading: false, success: true});
 				} else {
@@ -200,8 +199,7 @@ class DeployTicket extends Component {
 	                    content={this.state.errorMessage}/>
 											<Message
 										    success
-										    header='Deployed new ticket!'
-										  />
+										    header='Deployed new ticket!'/>
 
 										<Button
  										  fluid
