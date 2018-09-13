@@ -82,7 +82,6 @@ class DeployTicket extends Component {
 					from: accounts[0]
 				});
 
-				// IDEA: let createTicket return the contractAddress!
 				const deployedTickets = await factory.methods.getDeployedTickets().call();
 				const ticketAddress = deployedTickets[deployedTickets.length-1];
 

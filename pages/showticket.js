@@ -52,7 +52,7 @@ class ShowTicket extends Component {
 		return {ticket: ticket, carpark: carpark, user: user, startTime: startTime};
 		}
 
-		getCost = () =>{
+		getCost = () => {
 			const currentTime = Math.floor(Date.now()/1000);
 			const currentCost = parseFloat((currentTime - parseInt(this.props.ticket.startTime)))*(this.props.carpark.costHour/60/60);
 
@@ -68,11 +68,9 @@ class ShowTicket extends Component {
 				const accounts = await web3.eth.getAccounts();
 
 				const ticketSC = Ticket(this.props.ticket.contractAddress);
-
 				await ticketSC.methods.closeTicket().send({
 					from: accounts[0]
 				});
-				console.log(ticketSC);
 
 				const parkingCosts = await ticketSC.methods.parkingCosts().call();
 				const endTime = await ticketSC.methods.endTime().call();
@@ -109,7 +107,6 @@ class ShowTicket extends Component {
 					</Grid.Column>
 			);
 		}
-
 
 	render() {
 		return(
@@ -207,7 +204,6 @@ class ShowTicket extends Component {
 										 Request car & pay ticket
 									 </Button>
 								 </Form>
-
 
 				 </Segment>
 				</Grid>

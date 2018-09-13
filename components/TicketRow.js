@@ -17,7 +17,6 @@ class TicketRow extends Component {
     };
   }
 
-  // TODO: try with getInitialProps
   async componentDidMount() {
     Fonts();
     const responseCarpark = await axios

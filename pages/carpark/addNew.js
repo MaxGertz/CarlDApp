@@ -42,7 +42,7 @@ class AddCarpark extends Component {
 			country
 		} = this.state;
 
-		if(name != null || parkingSpaces != null || street != null
+		if (name != null || parkingSpaces != null || street != null
 			 || zipcode != null || city != null) {
 				 this.setState({loading: true, errorMessage:'', success: false});
 
