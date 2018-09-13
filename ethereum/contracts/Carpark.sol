@@ -67,6 +67,13 @@ contract Carpark {
          owner.transfer(address(this).balance);
      }
 
+		function getValue() public view returns(uint) {
+			return address(this).balance;
+		}
+
+		 function() payable{
+		 }
+
      modifier isOwner() {
         require(msg.sender == owner);
         _;

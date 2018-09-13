@@ -8,10 +8,8 @@ import {initStore} from '../redux';
 import initialize from '../utils/initialize';
 import Menubar from '../components/Menubar';
 import datetime from '../utils/datetime';
-
 import web3 from '../ethereum/web3';
 import Ticket from '../ethereum/ticket';
-
 import {Grid,
 				Menu,
 				Header,
@@ -74,9 +72,11 @@ class ShowTicket extends Component {
 				await ticketSC.methods.closeTicket().send({
 					from: accounts[0]
 				});
+				console.log(ticketSC);
 
 				const parkingCosts = await ticketSC.methods.parkingCosts().call();
 				const endTime = await ticketSC.methods.endTime().call();
+				console.log(parkingCosts);
 
 				await ticketSC.methods.payTicket().send({
 					from: accounts[0],

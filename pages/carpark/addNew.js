@@ -57,7 +57,7 @@ class AddCarpark extends Component {
 					 });
 
 					 const deployedCarparks = await carparkFactory.methods.getDeployedCarparks().call();
-					 const carparkAddress = deployedCarparks[deployedCarparks.length-1];
+					 const carparkAddress = await deployedCarparks[deployedCarparks.length-1];
 					 const carparkSC = Carpark(carparkAddress);
 
 					 await carparkSC.methods.addLocation(
