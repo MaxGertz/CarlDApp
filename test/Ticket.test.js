@@ -1,6 +1,7 @@
 const assert = require('assert');
 const ganache = require('ganache-cli');
 const Web3 = require('web3');
+require('events').EventEmitter.defaultMaxListeners = 0;
 const options = {
 	gasLimit: 8000000
 };
@@ -75,8 +76,6 @@ describe('Tickets', () => {
 		let balance = await web3.eth.getBalance(accounts[1]);
 		balance = web3.utils.fromWei(balance, 'ether');
 		balance = parseFloat(balance);
-
-		console.log(balance);
 
 		assert(balance > 102);
 	});
