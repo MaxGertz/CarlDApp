@@ -15,6 +15,7 @@ import {
 	 Form,
 	 Grid,
 	 Button,
+	 Message,
 	 Menu,
 	 Header,
 	 Icon,
@@ -51,7 +52,12 @@ class Overview extends Component {
 				});
 			const tickets = responseTicket.data;
 
-	    return {user: user, tickets: tickets, loggedIn: true};
+			let showTable = false;
+			if (tickets.length >= 1) {
+				showTable = true;
+			}
+
+	    return {user: user, tickets: tickets, loggedIn: true, showTable: showTable};
 		}
 	}
 
@@ -75,6 +81,7 @@ class Overview extends Component {
 	}
 
 	render() {
+		console.log(this.props);
 		return(
 				<div>
 					<Layout>
@@ -99,26 +106,36 @@ class Overview extends Component {
 									</Grid.Column>
 
 									<Grid.Column>
-										<Table style={{margin: '4em 0em 2em'}}>
 
-											<Table.Header>
-												<Table.Row textAlign='center'>
-													<Table.HeaderCell >License Plate</Table.HeaderCell>
-													<Table.HeaderCell>Start Time</Table.HeaderCell>
-													<Table.HeaderCell>Carpark</Table.HeaderCell>
-													<Table.HeaderCell>Show</Table.HeaderCell>
-												</Table.Row>
-											</Table.Header>
+											{(
+												this.props.showTable &&
+												<Table style={{margin: '4em 0em 2em'}}>
+													<Table.Header>
+														<Table.Row textAlign='center'>
+															<Table.HeaderCell >License Plate</Table.HeaderCell>
+															<Table.HeaderCell>Start Time</Table.HeaderCell>
+															<Table.HeaderCell>Carpark</Table.HeaderCell>
+															<Table.HeaderCell>Show</Table.HeaderCell>
+														</Table.Row>
+												</Table.Header>
 												<Table.Body>
 													{this.renderTickets()}
 												</Table.Body>
-										</Table>
+											</Table>
+										) ||
+											<Message>
+												<Message.Header>No open tickets</Message.Header>
+												<p>
+													You have no parked cars :(
+												</p>
+											</Message> }
+
 								</Grid.Column>
 
 								<Button
 									size='small'
 									onClick={this.openDeployTicket.bind(this)}
-									style={{background:'#f24344', color:'#fff'}}>
+									style={{background:'#f24344', color:'#fff', marginTop: '1em'}}>
 									Deploy new ticket!
 								</Button>
 

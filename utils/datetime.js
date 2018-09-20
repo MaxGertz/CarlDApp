@@ -1,3 +1,8 @@
+// converts timestamp to date!
+// problem: solidity block.timestamp returns seconds since unix epoch
+// 					javascript uses miliseconds since unix epoch
+//					-> block.timestamp needs to be multiplied by 1000
+
 export default function(timestamp) {
 	var date = new Date(timestamp*1000);
 
@@ -15,7 +20,7 @@ export default function(timestamp) {
 	min = (min < 10 ? "0" : "") + min;
 	sec = (sec < 10 ? "0" : "") + sec;
 
-
+	// creating a string in our used date format
 	var str = day + "." + month + "." + year + " " +  hour + ":" + min + ":" + sec;
 
 	return str;

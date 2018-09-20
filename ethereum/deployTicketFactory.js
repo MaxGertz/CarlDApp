@@ -2,6 +2,8 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const compiledFactory = require('./build/TicketFactory.json');
 
+// deploys the ticket contract to the ethereum network
+
 const provider = new HDWalletProvider(
     // MetaMask-Account Words
     'mind issue jungle trade pitch hurry sword garment north box clap price',
@@ -23,6 +25,7 @@ const deploy = async () => {
             gas: '1000000', from: accounts[0]
         });
 
+		// returning the address of the newly deployed factory -> needs to be saved and copied to ticketFactory.js
     console.log('Contract deployed to ', result.options.address);
 };
 

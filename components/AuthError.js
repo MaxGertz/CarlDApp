@@ -3,7 +3,8 @@ import Logo from './Logo';
 import {Router} from '../routes';
 import {Segment, Message, Button, Grid} from 'semantic-ui-react';
 
-
+// Error text that is shown if the user is not logged in.
+// Forwards the user to the login page
 
 class AuthError extends Component {
 
@@ -23,6 +24,7 @@ class AuthError extends Component {
 					marginTop: '100px'
 				}}
 				verticalAlign='middle'>
+
 				<Grid.Column
 					style={{maxWidth: 550}}>
 					<Segment
@@ -39,14 +41,13 @@ class AuthError extends Component {
 						<Button
 							fluid
 							onClick={this.onClick.bind(this)}
-							style={{background:'#ffcc33', color:'#fff'}}
-							>
+							style={{background:'#ffcc33', color:'#fff'}}>
 							Login
 						</Button>
 
 					</Segment>
 				</Grid.Column>
-				</Grid>
+			</Grid>
 		</div>
 	)
 	}

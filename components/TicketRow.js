@@ -6,7 +6,8 @@ import { API } from '../config';
 import { Router } from '../routes';
 import datetime from '../utils/datetime';
 
-///showticket/${this.props.ticket.contractAddress}
+// renders the rows for the table on the overview-page
+// adds a button to open a specific ticket
 
 class TicketRow extends Component {
   constructor(props) {
@@ -39,21 +40,20 @@ class TicketRow extends Component {
     const { Row, Cell } = Table;
 
     return (
-      <Row textAlign='center'>
-				<Cell>{this.props.ticket.licensePlate}</Cell>
-				<Cell>{datetime(this.props.ticket.startTime)}</Cell>
-				<Cell>{this.state.carpark.name}</Cell>
-				<Cell>
-						<Button
-							fluid
-							onClick={this.onClick.bind(this)}
-							style={{background:'#ffcc33', color:'#fff'}}>
-							Show Ticket
-						</Button>
-				</Cell>
-			</Row>
-    )
-  };
+	      <Row textAlign='center'>
+					<Cell>{this.props.ticket.licensePlate}</Cell>
+					<Cell>{datetime(this.props.ticket.startTime)}</Cell>
+					<Cell>{this.state.carpark.name}</Cell>
+					<Cell>
+							<Button
+								fluid
+								onClick={this.onClick.bind(this)}
+								style={{background:'#ffcc33', color:'#fff'}}>
+								Show Ticket
+							</Button>
+					</Cell>
+				</Row>
+    )};
 }
 
 export default TicketRow;

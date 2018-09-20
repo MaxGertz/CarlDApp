@@ -10,8 +10,10 @@ export default(
 ) => {
   switch (action.type) {
     case AUTHENTICATE:
+		// saves token to state 
       return {token: action.payload};
     case DEAUTHENTICATE:
+		// removes token from state
       return {token: null};
     default:
       return state;

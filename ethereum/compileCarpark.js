@@ -2,6 +2,10 @@ const path = require('path');
 const solc = require('solc');
 const fs = require('fs-extra');
 
+// compiles the carpark.sol contract and creates the ABI(application binary interface) of the contracts
+// ABI enables to call functions and get data back
+// also creates the bytecode of the contract to run on the EVM 
+
 const buildPath =  path.resolve(__dirname, 'build/carpark');
 
 //removeSync deletes old builds from build -> only the newest build available

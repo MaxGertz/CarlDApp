@@ -2,6 +2,9 @@ import React from 'react';
 import {Container, Surface} from 'semantic-ui-react';
 import Head from 'next/head';
 
+// sets the background-image & imports the semantic-ui.css
+// sets the title and favicon of the page
+// layout is used on all pages
 export default(props) => {
   return (
 	<Container>

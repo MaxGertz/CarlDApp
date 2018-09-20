@@ -1,4 +1,8 @@
 import cookie from 'js-cookie';
+
+// https://github.com/js-cookie/js-cookie/tree/latest#readme
+
+// setting a cookie that expires after one day
 export const setCookie = (key, value) => {
 	if (process.browser) {
 		cookie.set(key, value, {
@@ -7,6 +11,8 @@ export const setCookie = (key, value) => {
 		});
 	}
 };
+
+// removing the cookie
 export const removeCookie = (key, req) => {
 	if (process.browser) {
 		cookie.remove(key, {
@@ -14,12 +20,16 @@ export const removeCookie = (key, req) => {
 		});
 	}
 };
+
+// checking if we run on node-server or browser
 export const getCookie = (key, req) => {
 	return process.browser ? getCookieFromBrowser(key) : getCookieFromServer(key, req);
 };
+
 const getCookieFromBrowser = key => {
 	return cookie.get(key);
 };
+
 const getCookieFromServer = (key, req) => {
 	if (!req.headers.cookie) {
 		return undefined;
