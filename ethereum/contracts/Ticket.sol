@@ -21,7 +21,6 @@ contract Ticket {
 	address public carparkAddress;
 	string public licensePlate;
 	uint public startTime;
-
 	uint public endTime;
 	uint public parkingCosts;
 	bool public finished;
@@ -50,9 +49,14 @@ contract Ticket {
 		carparkAddress.transfer(msg.value);
 	}
 
+	function summary() public view isOwner returns(uint, uint) {
+		require(finished == true);
+
+		return (endTime, parkingCosts);
+	 }
+
 	modifier isOwner() {
 		require(msg.sender == owner);
 		_;
 	}
-
 }

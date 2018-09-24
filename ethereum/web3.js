@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+import {INFURA} from './infura';
 
 // creating a web3 instance
 // either uses the web3-instance of metamask or creates a instance by using infura
@@ -15,8 +16,8 @@ if(typeof  window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // we are on the server OR metamask is not running
     const provider = new Web3.providers.HttpProvider(
 			// using infura to access ethereum
-        'https://rinkeby.infura.io/v3/d3453f84389146268f063f4bdb3ccae0'
-    );
+			'https://rinkeby.infura.io/v3/d3453f84389146268f063f4bdb3ccae0'
+	);
 
     web3 = new Web3(provider);
 }

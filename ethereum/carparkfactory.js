@@ -1,5 +1,5 @@
 import web3 from './web3';
-import carparkFactory from './build/carpark/CarparkFactory.json';
+import carparkFactory from './buildCarpark/CarparkFactory.json';
 
 // creates an instance of the carparkFactory
 // address of the factory is hardcoded

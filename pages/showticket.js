@@ -9,6 +9,7 @@ import initialize from '../utils/initialize';
 import Menubar from '../components/Menubar';
 import datetime from '../utils/datetime';
 import web3 from '../ethereum/web3';
+import {Link} from '../routes';
 import Ticket from '../ethereum/ticket';
 import {Grid,
 				Menu,
@@ -68,13 +69,16 @@ class ShowTicket extends Component {
 				const accounts = await web3.eth.getAccounts();
 
 				const ticketSC = Ticket(this.props.ticket.contractAddress);
+				console.log(ticketSC);
 				await ticketSC.methods.closeTicket().send({
 					from: accounts[0]
 				});
 
-				const parkingCosts = await ticketSC.methods.parkingCosts().call();
-				const endTime = await ticketSC.methods.endTime().call();
-				console.log(parkingCosts);
+				// TODO: Not working all the time? WTF??????
+				let abc = await ticketSC.methods.summary().call();
+				console.log(abc);
+				// console.log('Parking cost: ' + parkingCosts);
+				// console.log('Endtime: ' + endTime);
 
 				await ticketSC.methods.payTicket().send({
 					from: accounts[0],
@@ -93,6 +97,7 @@ class ShowTicket extends Component {
 						this.setState({loading: false, errorMessage: 'Ticket is closed but not saved in the database'});
 					}
 			} catch (err) {
+				console.log(err);
 				this.setState({errorMessage: err.message, loading: false});
 			}
 		}
@@ -191,8 +196,19 @@ class ShowTicket extends Component {
                      content={this.state.errorMessage}/>
 									 <Message
 										 success
-										 header={'Successfully requested car'}
-										 content='You can pick up your car at B3'/>
+										 header={'Successfully requested car'}>
+										 <Message.Content>
+											 <p>You can pick up your car at B3.
+											 		We care about transparency and customer trust in our technology.
+											 		<Link route='/info/ticket'>
+														<a>
+															Therefore we invite you to view the smart contract we use.
+														</a>
+													</Link>
+													</p>
+										 </Message.Content>
+									 </Message>
+														{/* // TODO: add link to smart contract text:  */}
 
 									 <Button
 										 fluid

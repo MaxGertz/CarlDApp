@@ -99,6 +99,7 @@ class DeployTicket extends Component {
 						licensePlate: this.state.licensePlate,
 						startTime: startTime
 					});
+					console.log(res);
 				if(res.status == 201) {
 					this.setState({loading: false, success: true});
 				} else {
