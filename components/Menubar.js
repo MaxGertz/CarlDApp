@@ -5,14 +5,15 @@ import {initStore} from '../redux';
 import {connect} from 'react-redux';
 import initialize from '../utils/initialize';
 import {Menu, Header, Icon} from 'semantic-ui-react';
-import {Router, Link} from '../routes'
+import {Router} from '../routes';
+import Link from 'next/link';
 
 // menubar is used on all pages after the user logs in
 // consists of 3 items
 // 1: user-icon: onClick -> forwards to overview page
 // 2: settings-icon: onClick -> forwards to settings-page
 // 3: logout-icon: onClick -> logs out user and forwards to login-page
-// logout removes the token from store 
+// logout removes the token from store
 
 const Menubar = (
   {user, deauthenticate}
@@ -25,7 +26,7 @@ const Menubar = (
           margin: '2em 0em 2em'}}>
 
         <Menu.Item link name='username'>
-          <Link route="/">
+          <Link href="/" replace>
             <Header as='h2' size='small'>
               <Icon name='user circle'/>
               <Header.Content>{user.name}</Header.Content>
@@ -34,7 +35,7 @@ const Menubar = (
         </Menu.Item>
 
         <Menu.Item link name='settings'>
-					<Link route ='/user/settings'>
+					<Link href ='/user/settings' replace>
           	<Icon name='settings'/>
 					</Link>
         </Menu.Item>

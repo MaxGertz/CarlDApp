@@ -9,6 +9,7 @@ import initialize from '../utils/initialize';
 import Menubar from '../components/Menubar';
 import datetime from '../utils/datetime';
 import web3 from '../ethereum/web3';
+import {Link} from '../routes';
 import Ticket from '../ethereum/ticket';
 import {Grid,
 				Menu,
@@ -30,19 +31,21 @@ class ShowTicket extends Component {
 		};
 	}
 
-	// TODO: get ticket information from sc not db -> carpark info from db!
 	static async getInitialProps(props) {
-
+		// fetching the contractAddress from the url
 		const contractAddress = props.query.id;
 
+		// fetching the corresponding ticket from db
 		const responseTicket = await axios.get(
 			`${API}/api/ticket/byCA/${contractAddress}`);
 		const ticket = responseTicket.data;
 
+		// fetching user from db
 		const responseUser = await axios.get(
 			`${API}/api/user/find/${ticket.userId}`);
 		const user = responseUser.data;
 
+		// fetching car park from db
 		const responseCarpark = await axios.get(
 		`${API}/api/carpark/${ticket.carparkId}`);
 		const carpark = responseCarpark.data;
@@ -53,6 +56,8 @@ class ShowTicket extends Component {
 		}
 
 		getCost = () => {
+
+			// used to print the actual costs the ticket graphic
 			const currentTime = Math.floor(Date.now()/1000);
 			const currentCost = parseFloat((currentTime - parseInt(this.props.ticket.startTime)))*(this.props.carpark.costHour/60/60);
 
@@ -97,16 +102,16 @@ class ShowTicket extends Component {
 			}
 		}
 
-		renderCarpark() {
-			return(
-					<Grid.Column style={{width: '400px', marginTop: '10px'}}>
-						<b>CARPARK: </b>
-						<Grid.Row>{this.props.carpark.name}</Grid.Row>
-						<Grid.Row>{this.props.carpark.address.street} {this.props.carpark.address.number}</Grid.Row>
-						<Grid.Row>{this.props.carpark.address.zipCode} {this.props.carpark.address.city}</Grid.Row>
-					</Grid.Column>
-			);
-		}
+	renderCarpark() {
+		return(
+				<Grid.Column style={{width: '400px', marginTop: '10px'}}>
+					<b>CARPARK: </b>
+					<Grid.Row>{this.props.carpark.name}</Grid.Row>
+					<Grid.Row>{this.props.carpark.address.street} {this.props.carpark.address.number}</Grid.Row>
+					<Grid.Row>{this.props.carpark.address.zipCode} {this.props.carpark.address.city}</Grid.Row>
+				</Grid.Column>
+		);
+	}
 
 	render() {
 		return(
@@ -114,11 +119,11 @@ class ShowTicket extends Component {
 				<Layout>
 					<Grid
 						textAlign='center'
+						verticalAlign='middle'
 						style={{
 							height: '100%',
 							marginTop: '100px',
-						}}
-						verticalAlign='middle'>
+						}}>
 
 					<Segment
 						 raised
@@ -191,8 +196,18 @@ class ShowTicket extends Component {
                      content={this.state.errorMessage}/>
 									 <Message
 										 success
-										 header={'Successfully requested car'}
-										 content='You can pick up your car at B3'/>
+										 header={'Successfully requested car'}>
+											 <Message.Content>
+												 <p>You can pick up your car at B3</p>
+												 <p>We care about transparency and customer trust <b>in</b> our technology. Therefore we invite you to
+													 <Link route='/info/ticket'>
+														 <a>
+															 view the smart contract.
+														</a>
+													</Link>
+												</p>
+											</Message.Content>
+									</Message>
 
 									 <Button
 										 fluid
