@@ -11,7 +11,7 @@ const buildPath =  path.resolve(__dirname, 'build/ticket');
 //removeSync deletes old builds from build -> only the newest build available
 fs.removeSync(buildPath);
 
-console.log('Start compiling contracts! This might take a second.');
+console.log('Starting to compile contracts! This might take a second.');
 
 const contractPath = path.resolve(__dirname, 'contracts', 'Ticket.sol');
 const source = fs.readFileSync(contractPath, 'utf8');
