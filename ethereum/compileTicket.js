@@ -6,7 +6,7 @@ const fs = require('fs-extra');
 // ABI enables to call functions and get data back
 // also creates the bytecode of the contract to run on the EVM
 
-const buildPath =  path.resolve(__dirname, 'build/ticket');
+const buildPath = path.resolve(__dirname, 'build/ticket');
 
 //removeSync deletes old builds from build -> only the newest build available
 fs.removeSync(buildPath);
@@ -24,8 +24,5 @@ console.log(output);
 
 //write contract json's to build
 for (let contract in output) {
-    fs.outputJsonSync(
-      path.resolve(buildPath, contract.replace(':', '') + '.json'),
-      output[contract]
-    );
+  fs.outputJsonSync(path.resolve(buildPath, contract.replace(':', '') + '.json'), output[contract]);
 }

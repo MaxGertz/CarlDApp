@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import actions from '../redux/actions';
 import withRedux from 'next-redux-wrapper';
-import {initStore} from '../redux';
-import {connect} from 'react-redux';
+import { initStore } from '../redux';
+import { connect } from 'react-redux';
 import initialize from '../utils/initialize';
-import {Menu, Header, Icon} from 'semantic-ui-react';
-import {Router} from '../routes';
+import { Menu, Header, Icon } from 'semantic-ui-react';
+import { Router } from '../routes';
 import Link from 'next/link';
 
 // menubar is used on all pages after the user logs in
@@ -15,43 +15,38 @@ import Link from 'next/link';
 // 3: logout-icon: onClick -> logs out user and forwards to login-page
 // logout removes the token from store
 
-const Menubar = (
-  {user, deauthenticate}
-) => {
+const Menubar = ({ user, deauthenticate }) => {
   return (
-    <div className='Menubar'>
+    <div className="Menubar">
       <Menu
         borderless
         style={{
-          margin: '2em 0em 2em'}}>
-
-        <Menu.Item link name='username'>
+          margin: '2em 0em 2em'
+        }}>
+        <Menu.Item link name="username">
           <Link href="/" replace>
-            <Header as='h2' size='small'>
-              <Icon name='user circle'/>
+            <Header as="h2" size="small">
+              <Icon name="user circle" />
               <Header.Content>{user.name}</Header.Content>
             </Header>
           </Link>
         </Menu.Item>
 
-        <Menu.Item link name='settings'>
-					<Link href ='/user/settings' replace>
-          	<Icon name='settings'/>
-					</Link>
+        <Menu.Item link name="settings">
+          <Link href="/user/settings" replace>
+            <Icon name="settings" />
+          </Link>
         </Menu.Item>
 
-        <Menu.Item
-          name='logout'
-          onClick={deauthenticate}
-          position='right'>
-          <Icon name='log out'/>
+        <Menu.Item name="logout" onClick={deauthenticate} position="right">
+          <Icon name="log out" />
         </Menu.Item>
-
       </Menu>
     </div>
-  )
+  );
 };
 
-export default connect(null, actions)(
-  Menubar
-);
+export default connect(
+  null,
+  actions
+)(Menubar);

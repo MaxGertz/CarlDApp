@@ -1,56 +1,48 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Logo from './Logo';
-import {Router} from '../routes';
-import {Segment, Message, Button, Grid} from 'semantic-ui-react';
+import { Router } from '../routes';
+import { Segment, Message, Button, Grid } from 'semantic-ui-react';
 
 // Error text that is shown if the user is not logged in.
 // Forwards the user to the login page
 
 class AuthError extends Component {
+  onClick = event => {
+    event.preventDefault();
 
-	onClick = event => {
-		event.preventDefault();
+    Router.pushRoute('/signin');
+  };
 
-		Router.pushRoute('/signin');
-	}
+  render() {
+    return (
+      <div className="AuthError">
+        <Grid
+          textAlign="center"
+          style={{
+            height: '100%',
+            marginTop: '100px'
+          }}
+          verticalAlign="middle">
+          <Grid.Column style={{ maxWidth: 550 }}>
+            <Segment raised inverted style={{ background: '#5c5f63' }}>
+              <Logo />
+              <Message negative>
+                <Message.Header>You're not logged in!</Message.Header>
+                <p>Please login to continue</p>
+              </Message>
 
-	render () {
-		return(
-		<div className="AuthError">
-			<Grid
-				textAlign='center'
-				style={{
-					height: '100%',
-					marginTop: '100px'
-				}}
-				verticalAlign='middle'>
-
-				<Grid.Column
-					style={{maxWidth: 550}}>
-					<Segment
-						raised
-						inverted
-						style={{background: '#5c5f63' }}>
-
-						<Logo/>
-						<Message negative>
-							<Message.Header>You're not logged in!</Message.Header>
-							<p>Please login to continue</p>
-						</Message>
-
-						<Button
-							fluid
-							onClick={this.onClick.bind(this)}
-							style={{background:'#ffcc33', color:'#fff'}}>
-							Login
-						</Button>
-
-					</Segment>
-				</Grid.Column>
-			</Grid>
-		</div>
-	)
-	}
+              <Button
+                fluid
+                onClick={this.onClick.bind(this)}
+                style={{ background: '#ffcc33', color: '#fff' }}>
+                Login
+              </Button>
+            </Segment>
+          </Grid.Column>
+        </Grid>
+      </div>
+    );
+  }
 }
 
 export default AuthError;

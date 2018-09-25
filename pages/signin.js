@@ -1,17 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import withRedux from 'next-redux-wrapper';
-import {initStore} from '../redux';
+import { initStore } from '../redux';
 import actions from '../redux/actions';
 import initialize from '../utils/initialize';
-import {
-  Button,
-  Form,
-  Grid,
-  Segment,
-  Divider,
-  Message
-} from 'semantic-ui-react';
-import {Router} from '../routes';
+import { Button, Form, Grid, Segment, Divider, Message } from 'semantic-ui-react';
+import { Router } from '../routes';
 import Fonts from '../components/Font';
 import Layout from '../components/Layout';
 import Logo from '../components/Logo';
@@ -38,20 +31,22 @@ class Login extends Component {
   validateUser = event => {
     event.preventDefault();
 
-		this.setState({loading: true, errorMessage:''});
+    this.setState({ loading: true, errorMessage: '' });
 
-		try{
-			 this.props.authenticate({
-	        username: this.state.username,
-	        password: this.state.password
-	      }, 'signin');
+    try {
+      this.props.authenticate(
+        {
+          username: this.state.username,
+          password: this.state.password
+        },
+        'signin'
+      );
+    } catch (err) {
+      this.setState({ errorMessage: err.message });
+    }
 
-		} catch(err) {
-			this.setState({errorMessage: err.message});
-		}
-
-		this.setState({loading: false});
-  }
+    this.setState({ loading: false });
+  };
 
   registerUser(event) {
     event.preventDefault();
@@ -61,80 +56,69 @@ class Login extends Component {
 
   render() {
     return (
-      <div className='login-form'>
+      <div className="login-form">
         <Layout>
-
           <Grid
-            textAlign='center'
+            textAlign="center"
             style={{
               height: '100%',
               marginTop: '100px'
             }}
-            verticalAlign='middle'>
+            verticalAlign="middle">
             <Grid.Column
               style={{
                 maxWidth: 550
               }}>
               <Form
-                size='large'
-                onSubmit={this
-                  .validateUser
-                  .bind(this)}
+                size="large"
+                onSubmit={this.validateUser.bind(this)}
                 error={!!this.state.errorMessage}>
-
-                <Segment raised inverted style={{background:'#5c5f63'}}>
+                <Segment raised inverted style={{ background: '#5c5f63' }}>
                   <Form.Field>
-                    <Logo/>
+                    <Logo />
                   </Form.Field>
                   <Form.Input
                     fluid
-                    icon='user'
-                    iconPosition='left'
-                    placeholder='Username'
+                    icon="user"
+                    iconPosition="left"
+                    placeholder="Username"
                     value={this.state.username}
-                    onChange={event => this.setState({username: event.target.value})}/>
+                    onChange={event => this.setState({ username: event.target.value })}
+                  />
                   <Form.Input
                     fluid
-                    icon='lock'
-                    iconPosition='left'
-                    placeholder='Password'
-                    type='password'
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    type="password"
                     value={this.state.password}
-                    onChange={event => this.setState({password: event.target.value})}/>
+                    onChange={event => this.setState({ password: event.target.value })}
+                  />
                   <Button
                     fluid
                     loading={this.state.loading}
                     type="submit"
-										style={{background:'#ffcc33', color:'#fff'}}>
+                    style={{ background: '#ffcc33', color: '#fff' }}>
                     Login
                   </Button>
-                  <Divider  horizontal style={{color: '#fff'}}>Or</Divider>
+                  <Divider horizontal style={{ color: '#fff' }}>
+                    Or
+                  </Divider>
                   <Button
                     fluid
-                    onClick={this
-                      .registerUser
-                      .bind(this)}
-										style={{background:'#f24344', color:'#fff'}}>
+                    onClick={this.registerUser.bind(this)}
+                    style={{ background: '#f24344', color: '#fff' }}>
                     Sign Up Now
                   </Button>
-                  <Message
-                    error
-                    header={'Oops!'}
-                    content={this.state.errorMessage}/>
+                  <Message error header={'Oops!'} content={this.state.errorMessage} />
                 </Segment>
-
               </Form>
             </Grid.Column>
           </Grid>
-
         </Layout>
       </div>
     );
   }
 }
 
-export default withRedux(
-  initStore,
-  null,
-  actions
-)(Login);
+export default withRedux(initStore, null, actions)(Login);

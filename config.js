@@ -1,4 +1,4 @@
 module.exports = {
-	// URI to REST server
+  // URI to REST server
   API: 'http://localhost:5656'
 };
