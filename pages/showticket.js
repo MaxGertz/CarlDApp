@@ -100,7 +100,7 @@ class ShowTicket extends Component {
   renderCarpark() {
     return (
       <Grid.Column style={{ width: '400px', marginTop: '10px' }}>
-        <b>CARPARK: </b>
+        <b>CAR PARK: </b>
         <Grid.Row>{this.props.carpark.name}</Grid.Row>
         <Grid.Row>
           {this.props.carpark.address.street} {this.props.carpark.address.number}
