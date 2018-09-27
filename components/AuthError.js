@@ -18,11 +18,11 @@ class AuthError extends Component {
       <div className="AuthError">
         <Grid
           textAlign="center"
+          verticalAlign="middle"
           style={{
             height: '100%',
             marginTop: '100px'
-          }}
-          verticalAlign="middle">
+          }}>
           <Grid.Column style={{ maxWidth: 550 }}>
             <Segment raised inverted style={{ background: '#5c5f63' }}>
               <Logo />
