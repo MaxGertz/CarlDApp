@@ -8,6 +8,3 @@ node_modules/
 # ignore ContractAddress
 ContractAddress_Factory.txt
 ablage.txt
-/utils/colors.js
-
-.babelrc
