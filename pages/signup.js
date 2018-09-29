@@ -14,7 +14,6 @@ class Register extends Component {
     this.state = {
       username: '',
       password: '',
-      licensePlate: '',
       errorMessage: '',
       loading: false,
       success: false
@@ -86,15 +85,6 @@ class Register extends Component {
                     type="password"
                     value={this.state.password}
                     onChange={event => this.setState({ password: event.target.value })}
-                  />
-                  <Form.Input
-                    fluid
-                    icon="car"
-                    iconPosition="left"
-                    placeholder="License Plate"
-                    type="text"
-                    value={this.state.licensePlate}
-                    onChange={event => this.setState({ licensePlate: event.target.value })}
                   />
 
                   <Button
