@@ -21,6 +21,7 @@ class CarparkOverview extends Component {
 
     const token = ctx.store.getState().authentication.token;
 
+    // checking if user is logged in
     if (token) {
       const responseUser = await axios.get(`${API}/user`, {
         headers: {
@@ -40,6 +41,7 @@ class CarparkOverview extends Component {
     }
   }
 
+  // renders rows in carpark table for each carpark in db/ owned by user
   renderCarparks() {
     return this.props.carparks.map((carpark, index) => {
       return <CarparkRow key={index} carpark={carpark} />;

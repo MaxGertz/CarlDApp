@@ -80,10 +80,13 @@ class ShowTicket extends Component {
         value: parkingCosts
       });
 
+      // close ticket in the db
       const res = await axios.put(`${API}/api/ticket/closeTicket`, {
         _id: this.props.ticket._id,
         endTime: endTime
       });
+
+      // checking respondstatus
       if (res.status == 200) {
         this.setState({ loading: false, success: true });
       } else {
@@ -93,10 +96,12 @@ class ShowTicket extends Component {
         });
       }
     } catch (err) {
+      // showing errors in an error message to the user
       this.setState({ errorMessage: err.message, loading: false });
     }
   };
 
+  // renders the infos shown on the ticket graphic
   renderCarpark() {
     return (
       <Grid.Column style={{ width: '400px', marginTop: '10px' }}>
@@ -229,7 +234,7 @@ class ShowTicket extends Component {
                     background: '#ffcc33',
                     color: '#fff'
                   }}>
-                  Request car & pay ticket
+                  Pay ticket & request car
                 </Button>
               </Form>
             </Segment>

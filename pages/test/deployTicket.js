@@ -44,14 +44,18 @@ class DeployTicket extends Component {
     }
   }
 
+  // setting the value from dropdown menu(Carpark)
   onChangeCarpark = value => {
     this.setState({ carpark: value });
   };
 
+  // setting the value from dropdown menu(license plate)
   onChangeLP = value => {
     this.setState({ licensePlate: value });
   };
 
+  // creating a new ticket smart contract and deploying it
+  // finally saves new ticket after successful creation in db
   parkCar = async event => {
     event.preventDefault();
 
@@ -77,7 +81,6 @@ class DeployTicket extends Component {
 
         const startTime = await ticketSC.methods.startTime().call();
 
-        // add auth
         const res = await axios.post(`${API}/api/ticket/addNewTicket`, {
           userId: this.props.user._id,
           carparkId: this.state.carpark._id,
@@ -98,8 +101,6 @@ class DeployTicket extends Component {
     } else {
       this.setState({ errorMessage: 'Please choose carpark & license plate!' });
     }
-
-    // string licensePlate, address cpAddress, uint cost <- required parameters for new ticket
   };
 
   render() {

@@ -28,9 +28,12 @@ class AddCarpark extends Component {
     };
   }
 
+  // onClick-method -> creates a new carpark smart contract & deploys it to the
+  // blockchain
   createCarpark = async event => {
     event.preventDefault();
 
+    // getting entered informations from form
     const { name, parkingSpaces, costHour, street, number, zipcode, city, country } = this.state;
 
     if (
@@ -58,6 +61,7 @@ class AddCarpark extends Component {
           from: accounts[0]
         });
 
+        // saving new carpark to db
         const res = await axios.post(`${API}/api/carpark/addCarpark`, {
           name: name,
           wallet: carparkAddress,
@@ -72,6 +76,7 @@ class AddCarpark extends Component {
           costHour: costHour
         });
 
+        // checking responsestatus
         if (res.status == 201) {
           this.setState({ loading: false, success: true });
         } else {

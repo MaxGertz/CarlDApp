@@ -50,6 +50,7 @@ class Overview extends Component {
       });
       const tickets = responseTicket.data;
 
+      // checks if there are any open tickets
       let showTable = false;
       if (tickets.length >= 1) {
         showTable = true;
@@ -74,6 +75,7 @@ class Overview extends Component {
     Router.pushRoute('/test/deployTicket');
   };
 
+  // renders rows in ticket table
   renderTickets() {
     return this.props.tickets.map((ticket, index) => {
       return <TicketRow key={index} ticket={ticket} user={this.props.user} />;
