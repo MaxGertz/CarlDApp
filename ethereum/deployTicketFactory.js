@@ -6,9 +6,9 @@ const compiledFactory = require('./build/TicketFactory.json');
 
 const provider = new HDWalletProvider(
   // MetaMask-Account Words
-  'mind issue jungle trade pitch hurry sword garment north box clap price',
+  '',
   // personal Infuralink -> Contract is deployed by Infura node/api
-  'https://rinkeby.infura.io/v3/d3453f84389146268f063f4bdb3ccae0'
+  ''
 );
 const web3 = new Web3(provider);
 
