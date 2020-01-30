@@ -6,7 +6,7 @@ const compiledFactory = require('./build/carpark/CarparkFactory.json');
 
 const provider = new HDWalletProvider(
   // MetaMask-Account Words -> wallet that is used to deploy the contract
-  'mind issue jungle trade pitch hurry sword garment north box clap price',
+  '',
   // personal Infuralink -> Contract is deployed by Infura node/api
   // https://infura.io/
   
