@@ -1,6 +1,8 @@
 # Design and implementation of a smart contract based solution.
 Bachelorprojekt 2018
 
+Prototypical implementation of a smart contract-based solution for autonomous transactions of parking costs at car parks using Ethereum.
+
 #### Abstract
 
 Following the introduction and implementation of blockchain technology by Bitcoin, the
